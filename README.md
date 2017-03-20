@@ -11,11 +11,10 @@ See the example below.
 
 ## Installation
 
-Pull the image:
+For each image you want to integrate with this SumoLogic version:
 
-```
-docker pull kotowick/sumologic-collector:latest-file
-```
+1. add your `sumo-sources.json` file to /tmp/sumo/\<app-name\> # APP-NAME is REQUIRED
+2. add `VOLUME /tmp/sumo/\<app-name\>` to your Dockerfile
 
 ## Customize your own build
 
