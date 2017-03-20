@@ -1,0 +1,89 @@
+{
+  "AWSEBDockerrunVersion": 2,
+  "volumes": [
+    {
+      "name": "parent-logs",
+      "host": {
+        "sourcePath": "/var/log/containers"
+      }
+    }
+  ],
+  "containerDefinitions": [
+    {
+      "name": "nginx",
+      "image": "nginx:latest",
+      "essential": true,
+      "memory": 100,
+      "mountPoints": [
+        {
+          "sourceVolume": "awseb-logs-nginx",
+          "containerPath": "/var/log/nginx"
+        }
+      ],
+      "portMappings": [
+        {
+          "hostPort": 80,
+          "containerPort": 80
+        }
+      ],
+      "links":[
+        "wordpress:wordpress"
+      ]
+    },
+    {
+      "name": "wordpress",
+      "image": "wordpress:latest",
+      "essential": true,
+      "memory": 512,
+      "mountPoints": [
+        {
+          "sourceVolume": "awseb-logs-wordpress",
+          "containerPath": "/var/www/logs"
+        }
+      ]
+    },
+    {
+      "name": "sumologic",
+      "image": "kotowick/sumologic-collector:latest-file",
+      "essential": true,
+      "memory": 312,
+      "mountPoints": [
+        {
+          "sourceVolume": "parent-logs",
+          "containerPath": "/tmp/clogs",
+          "readOnly": true
+        }
+      ],
+      "volumesFrom": [
+        {
+          "sourceContainer": "wordress"
+        },
+        {
+          "sourceContainer": "nginx"
+        }
+      ],
+      "environment": [
+        {
+          "name": "SUMO_ACCESS_ID",
+          "value": ""
+        },
+        {
+          "name": "SUMO_ACCESS_KEY",
+          "value": ""
+        },
+        {
+          "name": "SUMO_COLLECTOR_NAME_PREFIX",
+          "value": ""
+        },
+        {
+          "name": "SUMO_CATEGORY",
+          "value": ""
+        },
+        {
+          "name": "SUMO_SOURCES_JSON",
+          "value": "/tmp/sumo-sources.json"
+        }
+      ]
+    }
+  ]
+}
