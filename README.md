@@ -5,18 +5,21 @@ This project is based off of the SumoLogic Collector image:
   - [Dockerhub](https://hub.docker.com/r/sumologic/collector/)
   - [GitHub](github.com/sumoLogic/sumologic-collector-docker/)
  
-With this image version, you can mount volumes from other containers (required volume path: /tmp/sumo/<your-app>/) you `/tmp/sumo/`. It then combines the `soures` from each `sumo-source file` under `/tmp/sumo` and writes it to `/tmp/sumo-sources.json.tmpl`.
+**Summary:** 
 
-See the example below.
+Combine multiple `sumo-source json files` from each Docker container (specificied by `--volume-from`) and output to /tmp/sumo-sources.json.tmpl
 
-## Installation
+## Usage
 
-For each image you want to integrate with this SumoLogic version:
+For each image you want to integrate with this SumoLogic version, add the following to your `Dockerfile`:
 
-1. add your `sumo-sources.json` file to /tmp/sumo/\<app-name\> # APP-NAME is REQUIRED
-2. add `VOLUME /tmp/sumo/\<app-name\>` to your Dockerfile
+```
+RUN mkdir /tmp/sumo/YOUR_APP_NAME
+ADD ./sumo-sources.json.tmpl /tmp/sumo/YOUR_APP_NAME
+VOLUME /tmp/sumo/YOUR_APP_NAME
+```
 
-## Customize your own build
+## Customization
 
 1. *Clone this repo:*
 
