@@ -1,0 +1,21 @@
+{
+  "api.version": "v1",
+  "sources": [
+    {
+      "sourceType" : "LocalFile",
+      "name": "${APP_NAME}_history_log",
+      "pathExpression": "/tmp/clogs/${APP_NAME}/history.log",
+      "automaticDateParsing": true,
+      "forceTimeZone": false,
+      "category": "${SUMO_CATEGORY}/${CONTAINER_NAME}_history_log"
+    },
+    {
+      "sourceType" : "LocalFile",
+      "name": "${APP_NAME}_access_log",
+      "pathExpression": "/tmp/clogs/${APP_NAME}/access.log",
+      "automaticDateParsing": true,
+      "forceTimeZone": false,
+      "category": "${SUMO_CATEGORY}/${CONTAINER_NAME}_access_log"
+    }
+	]
+}
