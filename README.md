@@ -30,29 +30,7 @@ VOLUME /tmp/sumo/YOUR_APP_NAME
 3. docker build . -t YOUR_OWN_IMAGE:TAG # build the image
 ```
 
-## Example
+## Notes
 
-- docker container 1 
-  - id: 4738595022..
-  - app: nginx
-  - volume: /tmp/sumo/nginx/ # REQUIRED
-- docker container 2
-  - id: 3749593030..
-  - app: wordpress
-  - volume: /tmp/sumo/wordpress/ # REQUIRED
- 
-```
-docker run -e SUMO_SOURCES_JSON='/tmp/sumo-sources.json' --volumes-from 4738595022 --volumes-from 3749593030 -d kotowick/sumologic-collector:latest-file
-```
-
-```
-Required Arguments:
--e SUMO_SOURCES_JSON='/tmp/sumo-sources.json'
---volumes-from (a container id)
-
-Optional Arguments:
--e SUMO_COLLECTOR_NAME_PREFIX='' 
--e SUMO_CATEGORY='' 
--e SUMO_ACCESS_ID=''
--e SUMO_ACCESS_KEY='' 
-```
+1. [Container Scenarios](https://github.com/kotowick/docker-sumologic-collector/wiki/Container-Scenarios)
+2. [Usage Eamples](https://github.com/kotowick/docker-sumologic-collector/wiki/Examples)
