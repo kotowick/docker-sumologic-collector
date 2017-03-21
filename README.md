@@ -24,15 +24,9 @@ VOLUME /tmp/sumo/YOUR_APP_NAME
 1. *Clone this repo:*
 
 ```
-git clone git@github.com:kotowick/docker-sumologic-collector.git
-```
-
-2. *Modify the Dockerfile*
-
-3. *Build the Image*
-
-```
-docker build . -t <your-docker-image-tag>
+1. git clone git@github.com:kotowick/docker-sumologic-collector.git # clone the repo
+2. Modify the Dockerfile
+3. docker build . -t YOUR_OWN_IMAGE:TAG # build the image
 ```
 
 ## Example
