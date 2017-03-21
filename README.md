@@ -1,60 +1,37 @@
 # docker-sumologic-collector
 
+**Summary:**
+```
+Combine multiple `sumo-source json files` from each Docker container (specificied by `--volume-from`)
+Output the combined-data to /tmp/sumo-sources.json.tmpl
+```
+
 This project is based off of the SumoLogic Collector image:
 
+```
   - [Dockerhub](https://hub.docker.com/r/sumologic/collector/)
   - [GitHub](github.com/sumoLogic/sumologic-collector-docker/)
- 
-With this image version, you can mount volumes from other containers (required volume path: /tmp/sumo/<your-app>/) you `/tmp/sumo/`. It then combines the `soures` from each `sumo-source file` under `/tmp/sumo` and writes it to `/tmp/sumo-sources.json.tmpl`.
-
-See the example below.
-
-## Installation
-
-For each image you want to integrate with this SumoLogic version:
-
-1. add your `sumo-sources.json` file to /tmp/sumo/\<app-name\> # APP-NAME is REQUIRED
-2. add `VOLUME /tmp/sumo/\<app-name\>` to your Dockerfile
-
-## Customize your own build
-
-1. *Clone this repo:*
-
-```
-git clone git@github.com:kotowick/docker-sumologic-collector.git
 ```
 
-2. *Modify the Dockerfile*
+## Usage
 
-3. *Build the Image*
-
-```
-docker build . -t <your-docker-image-tag>
-```
-
-## Example
-
-- docker container 1 
-  - id: 4738595022..
-  - app: nginx
-  - volume: /tmp/sumo/nginx/ # REQUIRED
-- docker container 2
-  - id: 3749593030..
-  - app: wordpress
-  - volume: /tmp/sumo/wordpress/ # REQUIRED
- 
-```
-docker run -e SUMO_SOURCES_JSON='/tmp/sumo-sources.json' --volumes-from 4738595022 --volumes-from 3749593030 -d kotowick/sumologic-collector:latest-file
-```
+For each image you want to integrate with this SumoLogic version, add the following to your `Dockerfile`:
 
 ```
-Required Arguments:
--e SUMO_SOURCES_JSON='/tmp/sumo-sources.json'
---volumes-from (a container id)
-
-Optional Arguments:
--e SUMO_COLLECTOR_NAME_PREFIX='' 
--e SUMO_CATEGORY='' 
--e SUMO_ACCESS_ID=''
--e SUMO_ACCESS_KEY='' 
+RUN mkdir /tmp/sumo/YOUR_APP_NAME
+ADD ./sumo-sources.json.tmpl /tmp/sumo/YOUR_APP_NAME
+VOLUME /tmp/sumo/YOUR_APP_NAME
 ```
+
+## Customization
+
+```
+1. git clone git@github.com:kotowick/docker-sumologic-collector.git # clone the repo
+2. Modify the Dockerfile
+3. docker build . -t YOUR_OWN_IMAGE:TAG # build the image
+```
+
+## Notes
+
+1. [Container Scenarios](https://github.com/kotowick/docker-sumologic-collector/wiki/Container-Scenarios)
+2. [Usage Eamples](https://github.com/kotowick/docker-sumologic-collector/wiki/Examples)
