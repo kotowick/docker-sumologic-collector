@@ -1,13 +1,16 @@
 # docker-sumologic-collector
 
+```
+Additonal Feature:
+------------------
+Combine multiple `sumo-source json files` from each Docker container (specificied by `--volume-from`)
+Output the combined-data to /tmp/sumo-sources.json.tmpl
+
 This project is based off of the SumoLogic Collector image:
 
   - [Dockerhub](https://hub.docker.com/r/sumologic/collector/)
   - [GitHub](github.com/sumoLogic/sumologic-collector-docker/)
- 
-**Summary:** 
-
-Combine multiple `sumo-source json files` from each Docker container (specificied by `--volume-from`) and output to /tmp/sumo-sources.json.tmpl
+```
 
 ## Usage
 
@@ -20,8 +23,6 @@ VOLUME /tmp/sumo/YOUR_APP_NAME
 ```
 
 ## Customization
-
-1. *Clone this repo:*
 
 ```
 1. git clone git@github.com:kotowick/docker-sumologic-collector.git # clone the repo
