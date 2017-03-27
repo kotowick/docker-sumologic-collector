@@ -1,5 +1,7 @@
 FROM sumologic/collector:latest-file
 
+LABEL maintainer "info@speko.io"
+
 RUN apt-get update
 
 RUN apt-get install ruby vim curl -y
