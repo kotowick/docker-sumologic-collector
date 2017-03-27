@@ -12,4 +12,4 @@ RUN chmod +x /usr/local/bin/psa-client
 
 ADD ./sumo-sources-parser.rb /tmp
 
-ENTRYPOINT ruby /tmp/sumo-sources-parser.rb '/tmp/sumo/**/*.json*' /tmp/sumo-sources.json.tmpl && psa-client && /bin/bash /run.sh
+ENTRYPOINT ruby /tmp/sumo-sources-parser.rb '/tmp/sumo/**/*.json*' /tmp/sumo-sources.json.tmpl && (source <(psa-client) & ./run.sh)
