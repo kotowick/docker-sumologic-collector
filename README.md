@@ -23,6 +23,10 @@ ADD ./sumo-sources.json.tmpl /tmp/sumo/YOUR_APP_NAME
 VOLUME /tmp/sumo/YOUR_APP_NAME
 ```
 
+**Sumo Source File**
+
+You can find SumoLogic Source example files [here](https://github.com/kotowick/docker-sumologic-collector/tree/master/examples). Inside a SumoSource file, you can either hard-code everything, or include ENV variables denoted by {} (see example). Sumo parses the json file and replaces all variables with the corresponding ENV values.
+
 ## Customization
 
 ```
